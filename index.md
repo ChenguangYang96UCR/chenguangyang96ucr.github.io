@@ -1,4 +1,9 @@
-# dream knowledge graph
+# DREAM-KG
 
 ## Overview
-**dream knowledg graph** 
+**Dynamic, REsponsive, Adaptive, and Multifaceted Knowledge Graph (DREAM-KG)**: An Open Knowledge Network to partially address **homelessness** with consideration of the social, economic, environmental, and political factors. 
+
+## Project Summary
+This project aims to create a knowledge graph (i.e., DREAM-KG) that will provide a comprehensive understanding of the social, economic, and political factors that contribute to **homelessness** while triaging existing services and resources to support people experiencing homelessness. The primary users of the system will be people experiencing homelessness, front-line case workers, law enforcement agents, non-profit organizations, and federal agencies. The knowledge graph will equip users with essential insights to address the homelessness problem more effectively. This includes understanding core structural factors, effective intervention methods, community resources, cultural nuances across diverse backgrounds, and policy knowledge from local to federal levels.
+
+The project will utilize emerging topological data analysis tools, artificial intelligence (AI) models, and innovative approaches for data acquisition and analysis related to homelessness. The resulting knowledge graph will feature user-friendly user interfaces, offering easy access to data and insights, enhancing service delivery to homeless populations. By harnessing geometric theory, explainable AI, and ontology techniques, the project aims to **advance understanding in AI applications, bridge the gap between AI and homelessness research, and offer novel solutions for homelessness prevention**. The educational component of the project includes mentoring underrepresented groups and incorporating project outcomes into various courses, such as Topological Data Analysis, Data Semantics, and Social Work education. The project outcomes will be shared broadly, engaging multiple stakeholders including the affected communities, clinicians, policymakers, and researchers, aiming to address the national homelessness crisis and improve resource allocation and housing policies.
