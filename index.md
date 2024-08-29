@@ -10,10 +10,72 @@ The project will utilize emerging topological data analysis tools, artificial in
 
 ## Team Member
 
-<center class="half">
-    <img src="./images/YuzhouChen.png" style="margin-right : 100px" width="200"/><img src="./images/YuzhouChen.png" style="margin-right : 100px" width="200"/><img src="./images/YuzhouChen.png" style="margin-right : 100px" width="200"/><img src="./images/YuzhouChen.png" style="margin-right : 100px" width="200"/>
-</center>
+<style>
+    .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
 
-Yuzhou Chen Assistant Professor,
-Department of Statistics, University of California, Riverside
+    .image-box {
+        text-align: center;
+        margin: 10px;
+    }
 
+    .image-box img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .image-box p {
+        margin-top: 8px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="container">
+    <div class="image-box">
+        <img src="./images/YuzhouChen.png" alt="YuzhouChen">
+        <p>Yuzhou Chen<br>Assistant Professor<br>Department of Statistics<br>University of California, Riverside</p>
+    </div>
+    <div class="image-box">
+        <img src="./images/Chiu C Tan.png" alt="Chiu C Tan">
+        <p>Chiu C. Tan<br>Associate Professor<br>Department of Computer and Information Sciences<br>Temple University</p>
+    </div>
+    <div class="image-box">
+        <img src="./images/HuanmeiWu.png" alt="HuanmeiWu">
+        <p>Huanmei Wu<br>Professor & Department Chair<br>Department of Health Services Administration and Policy<br>Temple University</p>
+    </div>
+    <div class="image-box">
+        <img src="./images/Karin Eyrich-Garg.png" alt="Karin Eyrich-Garg">
+        <p>Karin Eyrich-Garg<br>Associate Professor<br>School of Social Work<br>Temple University</p>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="image-box">
+        <img src="./images/Ying Ding.png" alt="Ying Ding">
+        <p>Ying Ding<br>Professor<br>School of Information & Dell Medical School<br>The University of Texas at Austin</p>
+    </div>
+    <div class="image-box">
+        <img src="./images/Omar Martinez.png" alt="Omar Martinez">
+        <p>Omar Martinez<br>Associate Professor<br>College of Medicine<br>University of Central Florida
+</p>
+    </div>
+    <div class="image-box">
+        <img src="./images/Prithviraj Lanka.png" alt="Prithviraj Lanka">
+        <p>Prithviraj Lanka<br>Developer<br>Shelter App</p>
+    </div>
+    <div class="image-box">
+        <img src="./images/Shak Ragoler.png" alt="Shak Ragoler">
+        <p>Shak Ragoler<br>Data architect<br>Shelter App</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="image-box">
+        <img src="./images/Joel Hunt.png" alt="Joel Hunt">
+        <p>Joel Hunt<br>Senior Computer Scientist<br>National Institute of Justice</p>
+    </div>
+</div>
