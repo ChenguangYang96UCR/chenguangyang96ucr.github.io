@@ -1,5 +1,5 @@
 
-<img src="./images/title.png" alt="title" height="600" width=100%>
+<img src="./images/title.png" alt="title" height="600">
 
 ## Overview
 **Dynamic, REsponsive, Adaptive, and Multifaceted Knowledge Graph (DREAM-KG)**: An Open Knowledge Network to partially address **homelessness** with consideration of the social, economic, environmental, and political factors. 
