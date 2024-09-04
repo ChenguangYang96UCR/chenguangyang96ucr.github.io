@@ -79,9 +79,33 @@
         padding-right: 200px;
     }
 
+    .lack_container {
+        display: flex;
+        /* justify-content: space-between; */
+        /* align-items: flex-start; */
+        padding-left: 150px;
+        padding-right: 200px;
+    }
+
     .image-box {
         text-align: center;
         margin: 10px;
+    }
+
+    .lack_image-box {
+        align-items:baseline;
+        text-align: center;
+        margin: 50px;
+    }
+
+    .lack_image-box img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .lack_image-box p {
+        margin-top: 8px;
+        font-size: 20px;
     }
 
     .image-box img {
@@ -92,6 +116,14 @@
     .image-box p {
         margin-top: 8px;
         font-size: 20px;
+    }
+</style>
+
+<style>
+    .lack-container {
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
     }
 </style>
 
@@ -118,7 +150,7 @@
 <div class="container">
     <div class="image-box">
         <img src="./images/Karin Eyrich-Garg.png" alt="Karin Eyrich-Garg">
-        <p>Karin Eyrich-Garg<br>Senior Personnel<br>National Institute of Mental Health</p>
+        <p>Karin Eyrich-Garg<br>Senior Personnel<br>National Institute of Mental<br> Health</p>
     </div>
     <div class="image-box">
         <img src="./images/Omar Martinez.png" alt="Omar Martinez">
@@ -134,9 +166,13 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="image-box">
+<div class="lack_container">
+    <div class="lack_image-box">
         <img src="./images/Chenguang Yang.jpg" alt="ChenguangYang">
         <p>Chenguang Yang<br>Ph.D<br>University of California, Riverside</p>
+    </div>
+    <div class="lack_image-box">
+        <img src="./images/Mimi Liao.jpg" alt="Mimi Liao">
+        <p>Mimi Liao<br>Master<br>University of Texas at Austin</p>
     </div>
 </div>
