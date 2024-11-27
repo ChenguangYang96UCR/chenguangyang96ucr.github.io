@@ -22,7 +22,49 @@
   flex: 1; /* auto fit  */
 }
 </style>
-<a href="./image.html">Data</a> <a href="#Tools">Tools</a> <a href="#Publications">Publications</a>
+
+<style>
+    nav a::after {
+        content: "|"; /* seperator */
+        margin-left: 8px; /* margin size */
+        color: #ccc; /* seperator color */
+    }
+
+    nav a:last-child::after {
+        content: ""; /* last link don't show seperator */
+    }
+
+    /* default state */
+    nav a {
+        text-decoration: none; /* remove underline */
+        color: #007bff; /* set default color */
+        font-size: 20px; /* hyperlink font size */
+    }
+
+    /* mouse hover state */
+    nav a:hover {
+        color: #ff5722; /* color when hover */
+        text-decoration: underline; /* add underline when hover */
+    }
+
+    /* after visited */
+    nav a:visited {
+        color: #6c757d; /* hyperlink color after click */
+    }
+
+    /* mouse click state */
+    nav a:active {
+        color: #dc3545; /* color when click */
+    }
+</style>
+
+<nav>
+    <a href="./image.html">Data</a>
+    <a href="#Tools">Tools</a>
+    <a href="#Publications">Publications</a>
+</nav>
+
+<!-- <a href="./image.html">Data</a> <a href="#Tools">Tools</a> <a href="#Publications">Publications</a> -->
 <div class="image_blank">
     <img src="./images/TITLE.jpg" alt="photo" style="margin:auto;">
 </div>
