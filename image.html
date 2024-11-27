@@ -1,57 +1,35 @@
-<style>
-
-div {
-  display: flex;
-  justify-content: center;
-  height: 800px;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    justify-content: center;
-    height: 800px;
-}
-
-.image-box {
-    display:flex;
-    /* justify-content:center; */
-    padding-left: 150px;
-    padding-right: 150px;
-    text-align: center;
-    margin: 10px;
-}
-
-.image_blank {
-    display:flex;
-    /* justify-content:center; */
-    padding-left: 150px;
-    padding-right: 150px;
-    text-align: center;
-    }
-
-img {
-  width: 80%;
-  height: 500px;
-  margin: auto;
-  display: block;
-}
-
-.content {
-  flex: 1; /* auto fit  */
-}
-</style>
-
-<div class="img">
-    <img src="./images/data_base.png" alt="photo" style="margin:auto;">
-</div>
-
-<div class="content">
-    <p style="font-size:25px; font-weight:lighter;"><b>Figure: The database structure used in DREAM-KG</p> 
-</div>
-
-
-
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Structure</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh; /* view height */
+            display: flex;
+            align-items: center; /* vertical center */
+            justify-content: center; /* horizon center */
+        }
+        .image-container {
+            text-align: center; /* keep information center */
+        }
+        .image-container img {
+            max-width: 80%; /* keep image in windows size */
+            height: auto; /* keep image percentage */
+        }
+        .image-container .caption {
+            font-size: 16px; /* set comment font size */
+            color: #555; /* set comment color */
+            margin-top: 8px; /* set image and comment margin */
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="./images/data_base.png" alt="data base structure">
+        <div class="caption">Figure: The database structure used in DREAM-KG</div>
+    </div>
+</body>
+</html>
