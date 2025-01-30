@@ -10862,9 +10862,10 @@ header.masthead {
   padding-bottom: 7rem;
   /* background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%); */
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center top	;
   /* background-attachment: scroll; */
   background-size: cover;
+  background-image: url('../images/image_v1.png');
 }
 header.masthead .masthead-content {
   z-index: 1;
@@ -10906,6 +10907,18 @@ header.masthead .bg-circle-4 {
   top: -5rem;
   right: 35%;
 }
+
+
+header.masthead .bg-background {
+  z-index: 0;
+  position: absolute;
+  border-radius: 100%;
+  background: url('/Users/chenguangyang/Desktop/ucr_work/dreamkg.github.io/images/image_v1.png');
+}
+/* header.masthead .background {
+  background-image: url('/Users/chenguangyang/Desktop/ucr_work/dreamkg.github.io/images/image_v1.png');
+} */
+
 
 @media (min-width: 992px) {
   header.masthead {
@@ -10967,4 +10980,28 @@ header.masthead .bg-circle-4 {
   font-size: 1rem;
   line-height: 1.5;
   color: #333;
+}
+
+
+.image_footer {
+  display: grid;
+  grid-template-columns: repeat(5, auto); /* 3 个图标等宽排列 */
+  justify-content: center;
+  align-items: center; /* 让图标垂直居中 */
+  gap: 70px;
+  background-color: rgba(51, 51, 51, 0.7);
+  padding: 20px;
+  position: bottom;
+  bottom: 0;
+  width: 100%;
+}
+
+.image_footer img {
+  width: 160px;
+  height: auto;
+  transition: opacity 0.3s;
+}
+
+.image_footer img:hover {
+  opacity: 0.7; /* 悬停时透明度变化 */
 }
