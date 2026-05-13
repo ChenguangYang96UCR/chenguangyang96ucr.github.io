@@ -10954,32 +10954,75 @@ header.masthead .bg-background {
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  justify-items: center;
-  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  align-items: stretch;
 }
 
 .team-member {
+  background: #fff;
+  border: 1px solid #d9e2ef;
+  border-radius: 24px;
+  padding: 24px 20px;
   text-align: center;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 24px rgba(31, 79, 130, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  min-height: 320px;   /* 让卡片高度统一 */
 }
 
-.team-member img {
-  max-width: 95%;
-  height: 80%;
+.team-photo-wrap {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  margin-bottom: 15px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  background: #eaf0f8;
+  border: 6px solid #dbe5f2;
+  flex-shrink: 0;
 }
 
-.team-member p {
+.team-photo-wrap img,
+.team-member img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* 关键：统一裁剪 */
+  object-position: center;
+  display: block;
+  border-radius: 50%;
+}
+
+.team-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #2d4666;
+}
+
+.team-role {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #e8eef8;
+  color: #2f5b91;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.team-affiliation {
   font-size: 1rem;
   line-height: 1.5;
-  color: #333;
+  color: #444;
+  min-height: 48px;   /* 关键：给学校名称留统一空间 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 
@@ -11004,4 +11047,32 @@ header.masthead .bg-background {
 
 .image_footer img:hover {
   opacity: 0.7; 
+}
+
+.graph-section {
+    background: #f4f8fc;
+}
+
+.graph-shell {
+    width: 100%;
+    height: 820px;
+    background: #ffffff;
+    border: 1px solid rgba(31, 79, 130, 0.12);
+    border-radius: 28px;
+    box-shadow: 0 18px 45px rgba(31, 79, 130, 0.1);
+    overflow: hidden;
+}
+
+.graph-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .graph-shell {
+        height: 900px;
+        border-radius: 20px;
+    }
 }
