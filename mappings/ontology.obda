@@ -46,25 +46,47 @@ mappingId	MAPID-Cost
 target		:category/cost/{iripart} a schema:CategoryCode ; schema:codeValue {cost}^^xsd:string ; schema:inCodeSet :__CategoryCodeSet_Cost . 
 source		select distinct "cost", iriify("cost") as iripart from public.aunt_bertha where "cost" is not null
 
-mappingId MAPID-Service-Social-Links
-target      :service/{service_id} schema:sameAs {facebook_url}^^xsd:anyUri , {twitter_url}^^xsd:anyUri .
+mappingId MAPID-Service-Facebook-Link
+target      :service/{service_id} schema:sameAs {facebook_url}^^xsd:anyUri .
 source      select
             aid.service_id,
-            facebook_url,
+            facebook_url
+            from public.aunt_bertha ab
+            join public.ab_ids aid on ab.service_url = aid.service_url
+            where facebook_url is not null
+            and trim(facebook_url) <> ''
+			and lower(trim(facebook_url)) <> 'none'
+
+mappingId MAPID-Service-Twitter-Link
+target      :service/{service_id} schema:sameAs {twitter_url}^^xsd:anyUri .
+source      select
+            aid.service_id,
             twitter_url
             from public.aunt_bertha ab
             join public.ab_ids aid on ab.service_url = aid.service_url
-            where facebook_url is not null or twitter_url is not null
+            where twitter_url is not null
+            and trim(twitter_url) <> ''
+			and lower(trim(twitter_url)) <> 'none'
 
-mappingId	MAPID-Service-Description
-target		:service/description/{service_id} a schema:TextObject ; schema:text {description}^^xsd:string ; schema:conditionsOfAccess {eligibility}^^xsd:string . 
-source		select
-			aid.service_id,
-			el.eligibility,
-			description
-			from public.aunt_bertha ab
-			join public.ab_ids aid on ab.service_url = aid.service_url
-			join public.eligibility el on aid.service_id = el.service_id
+mappingId MAPID-Service-Description-Text
+target      :service/description/{service_id} a schema:TextObject ; schema:text {description}^^xsd:string .
+source      select distinct
+            aid.service_id,
+            ab.description
+            from public.aunt_bertha ab
+            join public.ab_ids aid
+              on trim(ab.service_url) = trim(aid.service_url)
+            where ab.description is not null
+              and trim(ab.description) <> ''
+
+mappingId MAPID-Service-Eligibility
+target      :service/description/{service_id} schema:conditionsOfAccess {eligibility}^^xsd:string .
+source      select distinct
+            service_id,
+            eligibility
+            from public.eligibility
+            where eligibility is not null
+              and trim(eligibility) <> ''
 
 mappingId	MAPID-Service-Channel-AB
 target		:service/channel/AB-{service_id} a schema:ServiceChannel ; schema:disambiguatingDescription "Aunt Bertha"^^xsd:string ; schema:serviceUrl {service_url}^^xsd:anyUri . 

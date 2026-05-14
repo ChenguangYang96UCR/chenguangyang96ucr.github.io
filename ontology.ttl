@@ -82,6 +82,14 @@ schema:servicePhone rdf:type owl:ObjectProperty .
 schema:suggestedAnswer rdf:type owl:ObjectProperty .
 
 
+###  http://www.opengis.net/ont/geosparql/hasGeometry
+geo:hasGeometry rdf:type owl:ObjectProperty .
+
+
+###  http://www.opengis.net/ont/geosparql/defaultGeometry
+geo:defaultGeometry rdf:type owl:ObjectProperty .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -183,6 +191,17 @@ schema:text rdf:type owl:DatatypeProperty .
 schema:url rdf:type owl:DatatypeProperty .
 
 
+###  http://www.opengis.net/ont/geosparql/asWKT
+geo:asWKT rdf:type owl:DatatypeProperty .
+
+
+###  http://www.opengis.net/ont/geosparql/lat
+geo:lat rdf:type owl:DatatypeProperty .
+
+
+###  http://www.opengis.net/ont/geosparql/long
+geo:long rdf:type owl:DatatypeProperty .
+
 #################################################################
 #    Classes
 #################################################################
@@ -246,15 +265,9 @@ schema:TextObject rdf:type owl:Class .
 <https://purl.org/okn/frink/kg/dreamkg/> rdf:type owl:Ontology ;
     rdfs:comment "..." .
 
+###  https://purl.org/okn/frink/kg/dreamkg/ServiceGeometry
 :ServiceGeometry rdf:type owl:Class ;
     rdfs:subClassOf geo:Geometry .
-
-geo:hasGeometry rdf:type owl:ObjectProperty .
-geo:defaultGeometry rdf:type owl:ObjectProperty .
-
-geo:asWKT rdf:type owl:DatatypeProperty .
-geo:lat rdf:type owl:DatatypeProperty .
-geo:long rdf:type owl:DatatypeProperty .
 
 
 #################################################################

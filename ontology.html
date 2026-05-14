@@ -210,7 +210,9 @@
 
     .meta-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .summary-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-    .card-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card-grid {
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    }
     .xrefs-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
     .info-card {
@@ -218,6 +220,34 @@
       border: 1px solid var(--dream-border);
       border-radius: 22px;
       background: #ffffff;
+    }
+
+    .property-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
+        margin-top: 0.85rem;
+    }
+
+    .property-list code {
+        display: block;
+        width: fit-content;
+        max-width: 100%;
+        padding: 0.28rem 0.55rem;
+        border-radius: 9px;
+        background: var(--dream-code);
+        color: #163b63;
+        font-size: 1rem;
+        line-height: 1.35;
+        white-space: normal;
+        overflow-wrap: normal;
+        word-break: normal; 
+    }
+
+    .info-card strong {
+        display: block;
+        margin-bottom: 0.6rem;
+        font-size: 1.08rem;
     }
 
     .soft-card {
@@ -355,7 +385,17 @@
     }
 
     .node.main { background: #e8f2ff; color: var(--dream-primary); }
-    .arrow { text-align: center; color: var(--dream-accent); font-weight: 900; }
+    .arrow {
+        text-align: center;
+        color: var(--dream-accent);
+        font-weight: 900;
+        font-size: 3rem;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 3.5rem;
+    }
 
     .download-row {
       display: flex;
@@ -363,7 +403,7 @@
       gap: 0.75rem;
       margin-top: 1rem;
     }
-
+···
     .download-row a {
       display: inline-flex;
       align-items: center;
@@ -529,13 +569,13 @@
         <span class="section-kicker">Overview</span>
         <h2>DREAM-KG Ontology Overview</h2>
         <div class="summary-grid">
-          <div class="info-card soft-card"><span class="metric">11</span><span class="metric-label">Main reused or local classes</span></div>
+          <div class="info-card soft-card"><span class="metric">16</span><span class="metric-label">Main reused or local classes</span></div>
           <div class="info-card soft-card"><span class="metric">18+</span><span class="metric-label">Object properties used in mappings</span></div>
           <div class="info-card soft-card"><span class="metric">24+</span><span class="metric-label">Data properties used for service attributes</span></div>
           <div class="info-card soft-card"><span class="metric">30+</span><span class="metric-label">OBDA mappings from relational tables/views</span></div>
         </div>
 
-        <h3>Core Classes</h3>
+        <h3>Classes</h3>
         <ul class="tag-list">
           <li>schema:Service</li>
           <li>schema:CategoryCode</li>
@@ -547,35 +587,77 @@
           <li>schema:Rating</li>
           <li>schema:Audience</li>
           <li>schema:Organization</li>
+          <li>schema:OpeningHoursSpecification</li>
+          <li>schema:AdministrativeArea</li>
+          <li>schema:Question</li>
+          <li>schema:Answer</li>
+          <li>:ServiceGeometry</li>
           <li>geo:Geometry</li>
         </ul>
 
         <h3>Major Property Groups</h3>
-        <div class="card-grid">
-          <div class="info-card">
-            <strong>Identity</strong>
-            <p><code>schema:identifier</code>, <code>schema:name</code>, <code>schema:sameAs</code>, <code>schema:url</code></p>
-          </div>
-          <div class="info-card">
-            <strong>Classification</strong>
-            <p><code>schema:category</code>, <code>schema:codeValue</code>, <code>schema:inCodeSet</code>, <code>skos:exactMatch</code></p>
-          </div>
-          <div class="info-card">
-            <strong>Access</strong>
-            <p><code>schema:conditionsOfAccess</code>, <code>schema:areaServed</code>, <code>schema:openingHours</code></p>
-          </div>
-          <div class="info-card">
-            <strong>Contact and channel</strong>
-            <p><code>schema:availableChannel</code>, <code>schema:serviceUrl</code>, <code>schema:servicePhone</code>, <code>schema:telephone</code></p>
-          </div>
-          <div class="info-card">
-            <strong>Spatial</strong>
-            <p><code>schema:serviceLocation</code>, <code>schema:containedInPlace</code>, <code>kwgo:sfWithin</code>, <code>geo:asWKT</code></p>
-          </div>
-          <div class="info-card">
-            <strong>Reputation</strong>
-            <p><code>schema:review</code>, <code>schema:reviewBody</code>, <code>schema:reviewRating</code>, <code>schema:ratingValue</code></p>
-          </div>
+        <div class="card-grid property-card-grid">
+
+            <div class="info-card">
+                <strong>Identity</strong>
+                <div class="property-list">
+                <code>schema:identifier</code>
+                <code>schema:name</code>
+                <code>schema:sameAs</code>
+                <code>schema:url</code>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <strong>Classification</strong>
+                <div class="property-list">
+                <code>schema:category</code>
+                <code>schema:codeValue</code>
+                <code>schema:inCodeSet</code>
+                <code>skos:exactMatch</code>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <strong>Access</strong>
+                <div class="property-list">
+                <code>schema:conditionsOfAccess</code>
+                <code>schema:areaServed</code>
+                <code>schema:hoursAvailable</code>
+                <code>schema:opens</code>
+                <code>schema:closes</code>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <strong>Contact and channel</strong>
+                <div class="property-list">
+                <code>schema:availableChannel</code>
+                <code>schema:serviceUrl</code>
+                <code>schema:servicePhone</code>
+                <code>schema:telephone</code>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <strong>Spatial</strong>
+                <div class="property-list">
+                <code>schema:serviceLocation</code>
+                <code>schema:containedInPlace</code>
+                <code>kwgo:sfWithin</code>
+                <code>geo:asWKT</code>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <strong>Reputation</strong>
+                <div class="property-list">
+                <code>schema:review</code>
+                <code>schema:reviewBody</code>
+                <code>schema:reviewRating</code>
+                <code>schema:ratingValue</code>
+                </div>
+            </div>
         </div>
       </section>
 
@@ -630,14 +712,22 @@
           <div class="info-card">
             <h3>Classes</h3>
             <ul>
-              <li><code>schema:Service</code> — a social or community service.</li>
-              <li><code>schema:CategoryCode</code> — controlled category values such as language, cost, service type, and availability.</li>
-              <li><code>schema:ServiceChannel</code> — provider or Aunt Bertha access channel.</li>
-              <li><code>schema:ContactPoint</code> — phone contact for a service.</li>
-              <li><code>schema:Place</code> — physical service location.</li>
-              <li><code>schema:TextObject</code> — service description and eligibility text.</li>
-              <li><code>schema:Review</code> and <code>schema:Rating</code> — review entities and ratings.</li>
-              <li><code>geo:Geometry</code> — WKT representation of service coordinates.</li>
+              <li><code>schema:Service</code> — community service.</li>
+              <li><code>schema:CategoryCode</code> — controlled category.</li>
+              <li><code>schema:ServiceChannel</code> — access channel.</li>
+              <li><code>schema:ContactPoint</code> — phone contact.</li>
+              <li><code>schema:Place</code> — service location.</li>
+              <li><code>schema:TextObject</code> — description text.</li>
+              <li><code>schema:Review</code> — user review.</li>
+              <li><code>schema:Rating</code> — rating value.</li>
+              <li><code>schema:Audience</code> — target users.</li>
+              <li><code>schema:Organization</code> — service provider.</li>
+              <li><code>schema:OpeningHoursSpecification</code> — opening hours.</li>
+              <li><code>schema:AdministrativeArea</code> — geographic area.</li>
+              <li><code>schema:Question</code> — FAQ question.</li>
+              <li><code>schema:Answer</code> — FAQ answer.</li>
+              <li><code>geo:Geometry</code> — spatial geometry.</li>
+              <li><code>:ServiceGeometry</code> — service point geometry.</li>
             </ul>
           </div>
 
@@ -650,20 +740,41 @@
               <li><code>schema:servicePhone</code> — links provider channel to phone contact.</li>
               <li><code>schema:description</code> — links a service to a text object.</li>
               <li><code>schema:review</code> — links a service to reviews.</li>
-              <li><code>geo:hasGeometry</code> and <code>geo:defaultGeometry</code> — attach geometry to a place.</li>
+              <li><code>geo:hasGeometry</code> — attach geometry to a place.</li>
+              <li><code>geo:defaultGeometry</code> — attach geometry to a place.</li>
             </ul>
           </div>
 
           <div class="info-card">
             <h3>Data Properties</h3>
             <ul>
-              <li><code>schema:identifier</code>, <code>schema:name</code>, <code>schema:text</code></li>
-              <li><code>schema:conditionsOfAccess</code>, <code>schema:areaServed</code></li>
-              <li><code>schema:telephone</code>, <code>schema:serviceUrl</code></li>
-              <li><code>schema:address</code>, <code>schema:latitude</code>, <code>schema:longitude</code></li>
-              <li><code>schema:postalCode</code>, <code>schema:hasMap</code></li>
-              <li><code>schema:reviewBody</code>, <code>schema:ratingValue</code></li>
-              <li><code>geo:asWKT</code></li>
+              <li><code>schema:abstract</code> — Brief summary.</li>
+              <li><code>schema:address</code> — Street address.</li>
+              <li><code>schema:areaServed</code> — Service area.</li>
+              <li><code>schema:audienceType</code> — Audience type.</li>
+              <li><code>schema:closes</code> — Closing time.</li>
+              <li><code>schema:codeValue</code> — Category value.</li>
+              <li><code>schema:conditionsOfAccess</code> — Access rules.</li>
+              <li><code>schema:dayOfWeek</code> — Service day.</li>
+              <li><code>schema:disambiguatingDescription</code> — Source label.</li>
+              <li><code>schema:hasMap</code> — Map URL.</li>
+              <li><code>schema:identifier</code> — Service ID.</li>
+              <li><code>schema:isAccessibleForFree</code> — Free access.</li>
+              <li><code>schema:latitude</code> — Latitude.</li>
+              <li><code>schema:longitude</code> — Longitude.</li>
+              <li><code>schema:name</code> — Display name.</li>
+              <li><code>schema:opens</code> — Opening time.</li>
+              <li><code>schema:ratingValue</code> — Rating score.</li>
+              <li><code>schema:reviewBody</code> — Review text.</li>
+              <li><code>schema:sameAs</code> — External link.</li>
+              <li><code>schema:serviceUrl</code> — Service URL.</li>
+              <li><code>schema:subjectOf</code> — Related content.</li>
+              <li><code>schema:telephone</code> — Phone number.</li>
+              <li><code>schema:text</code> — Text content.</li>
+              <li><code>schema:url</code> — Web URL.</li>
+              <li><code>geo:asWKT</code> — WKT geometry.</li>
+              <li><code>geo:lat</code> — Geo latitude.</li>
+              <li><code>geo:long</code> — Geo longitude.</li>
             </ul>
           </div>
         </div>
@@ -708,7 +819,11 @@
             <p>Extracts Aunt Bertha service IDs from service URLs and serves as the central join key for RDF resource IRIs.</p>
           </div>
           <div class="info-card">
-            <h3><code>main_services</code> and <code>other_services</code></h3>
+            <h3><code>main_services</code></h3>
+            <p>Normalize list-like service category fields into one row per service-category pair.</p>
+          </div>
+          <div class="info-card">
+            <h3><code>other_services</code></h3>
             <p>Normalize list-like service category fields into one row per service-category pair.</p>
           </div>
           <div class="info-card">
