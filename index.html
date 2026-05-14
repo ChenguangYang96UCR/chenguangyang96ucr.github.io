@@ -245,6 +245,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="./image.html">Data</a></li>
+            <li class="nav-item"><a class="nav-link" href="#ontology">Ontology</a></li>
             <li class="nav-item"><a class="nav-link" href="#graph">Graph</a></li>
             <li class="nav-item"><a class="nav-link" href="./ontology.html">Ontology</a></li>
             <li class="nav-item"><a class="nav-link" href="#!">Tools</a></li>
@@ -308,6 +309,50 @@
       </div>
     </div>
   </section>
+
+  <!-- Ontology Structure -->
+<section id="ontology" class="page-section ontology-section">
+    <div class="container px-5">
+
+        <div class="section-header">
+            <span class="section-kicker">Ontology</span>
+            <h2 class="section-title">DREAM-KG Ontology Structure</h2>
+            <p class="section-lead">
+                The DREAM-KG ontology organizes homeless-service information into a semantic structure centered on
+                <strong>schema:Service</strong>. It connects services with categories, eligibility descriptions,
+                contact channels, locations, languages, reviews, ratings, and geospatial context.
+            </p>
+        </div>
+
+        <div class="content-card ontology-card">
+            <p>
+                Each service node is linked to structured category codes such as service type, cost,
+                availability, language, and target audience. Supporting entities describe access channels,
+                phone contacts, opening hours, textual descriptions, eligibility requirements, reviews,
+                and ratings. Spatial entities connect service locations to ZIP-code areas and geometries,
+                enabling location-aware search and neighborhood reasoning.
+            </p>
+
+            <div class="ontology-image-wrap">
+                <img
+                    class="ontology-image"
+                    src="./images/dreamkg_ontology_structure.svg"
+                    alt="DREAM-KG ontology structure diagram"
+                />
+            </div>
+
+            <div class="ontology-actions">
+                <a class="ontology-btn" href="./ontology.html">
+                    View Ontology Documentation
+                </a>
+                <a class="ontology-btn ontology-btn-secondary" href="#graph">
+                    Open Graph Explorer
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
 
   <!-- Graph Explorer -->
     <section id="graph" class="page-section graph-section">
