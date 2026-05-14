@@ -1,0 +1,273 @@
+[PrefixDeclaration]
+:			https://purl.org/okn/frink/kg/dreamkg/
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+obda:		https://w3id.org/obda/vocabulary#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+skos:		http://www.w3.org/2004/02/skos/core#
+schema:		http://schema.org/
+xmlschema:  https://www.w3.org/TR/xmlschema11-2#
+geo: 		http://www.opengis.net/ont/geosparql#
+kwgo:		http://stko-kwg.geog.ucsb.edu/lod/ontology/
+kwgr:		http://stko-kwg.geog.ucsb.edu/lod/resource/
+wiki: 		https://www.wikidata.org/wiki/
+linkml: https://w3id.org/linkml/
+phila: https://metadata.phila.gov/
+
+[MappingDeclaration] @collection [[
+mappingId	MAPID-Service-Names-Main
+target		:category/service/main/{iripart} a schema:CategoryCode ; schema:codeValue {service_name}^^xsd:string ; schema:inCodeSet :_CategoryCodeSet_Services_Main . 
+source		select distinct service_name, iriify(service_name) as iripart from public.main_services
+
+mappingId	MAPID-Service-Names-Other
+target		:category/service/other/{iripart} a schema:CategoryCode ; schema:codeValue {service_name}^^xsd:string ; schema:inCodeSet :_CategoryCodeSet_Services_Other . 
+source		select distinct service_name, iriify(service_name) as iripart from public.other_services
+
+mappingId	MAPID-Languages
+target		:category/language/{iripart} a schema:CategoryCode ; schema:codeValue {language}^^xsd:string ; schema:inCodeSet :_CategoryCodeSet_Languages . 
+source		select distinct "language", iriify("language") as iripart from public.languages
+
+mappingId	MAPID-ZipCodes
+target		:service/{service_id} schema:postalCode {zipcode}^^xsd:string . 
+source		select 
+			aid.service_id,
+			zipcode
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where zipcode is not null
+
+mappingId	MAPID-Availability
+target		:category/availability/{iripart} a schema:CategoryCode ; schema:codeValue {availability}^^xsd:string ; schema:inCodeSet :__CategoryCodeSet_Availability . 
+source		select distinct availability, iriify("availability") as iripart from public.aunt_bertha where availability is not null
+
+mappingId	MAPID-Cost
+target		:category/cost/{iripart} a schema:CategoryCode ; schema:codeValue {cost}^^xsd:string ; schema:inCodeSet :__CategoryCodeSet_Cost . 
+source		select distinct "cost", iriify("cost") as iripart from public.aunt_bertha where "cost" is not null
+
+mappingId MAPID-Service-Social-Links
+target      :service/{service_id} schema:sameAs {facebook_url}^^xsd:anyUri , {twitter_url}^^xsd:anyUri .
+source      select
+            aid.service_id,
+            facebook_url,
+            twitter_url
+            from public.aunt_bertha ab
+            join public.ab_ids aid on ab.service_url = aid.service_url
+            where facebook_url is not null or twitter_url is not null
+
+mappingId	MAPID-Service-Description
+target		:service/description/{service_id} a schema:TextObject ; schema:text {description}^^xsd:string ; schema:conditionsOfAccess {eligibility}^^xsd:string . 
+source		select
+			aid.service_id,
+			el.eligibility,
+			description
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			join public.eligibility el on aid.service_id = el.service_id
+
+mappingId	MAPID-Service-Channel-AB
+target		:service/channel/AB-{service_id} a schema:ServiceChannel ; schema:disambiguatingDescription "Aunt Bertha"^^xsd:string ; schema:serviceUrl {service_url}^^xsd:anyUri . 
+source		select service_id, service_url from public.ab_ids
+
+mappingId	MAPID-Service-Phone
+target		:service/phone/{service_id} a schema:ContactPoint ; schema:telephone "tel:+1-{phone_number}"^^xsd:string . 
+source		select
+			aid.service_id,
+			phone_number
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+
+mappingId	MAPID-Service-Location
+target		:service/location/{service_id} a schema:Place ; schema:address {location_address}^^xsd:string ; schema:latitude {latitude}^^xsd:decimal ; schema:longitude {longitude}^^xsd:decimal ; schema:hasMap {location_url_map}^^xsd:anyUri ; schema:containedInPlace kwgr:zipCodeArea.{zipcode} ; kwgo:sfWithin kwgr:zipCodeArea.{zipcode} .
+source		select
+			aid.service_id,
+			location_address,
+			location_url_map,
+			latitude,
+			longitude,
+			zipcode
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where zipcode is not null
+
+mappingId	MAPID-Service-Channel-Provider
+target		:service/channel/P-{service_id} a schema:ServiceChannel ; schema:disambiguatingDescription "Provider"^^xsd:string ; schema:serviceUrl {website}^^xsd:anyUri ; schema:serviceLocation :service/location/{service_id} ; schema:servicePhone :service/phone/{service_id} . 
+source		select
+			aid.service_id,
+			website
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+
+mappingId MAPID-Services
+target      :service/{service_id} a schema:Service ; schema:identifier {service_id}^^xsd:string ; schema:name {service_name}^^xsd:string ; schema:category :category/cost/{cost} , :category/availability/{availability} ; schema:areaServed {coverage}^^xsd:string ; schema:availableChannel :service/channel/AB-{service_id} , :service/channel/P-{service_id} ; schema:description :service/description/{service_id} .
+source      select
+			aid.service_id,
+			ab.service_name,
+			iriify(ab.availability) as availability,
+			iriify(ab."cost") as "cost",
+			ab.coverage
+            from public.aunt_bertha ab
+            join public.ab_ids aid on ab.service_url = aid.service_url
+            where ab.service_name is not null
+
+mappingId	MAPID-Services
+target		:service/{service_id} a schema:Service ; schema:identifier {service_id}^^xsd:string ; schema:name {service_name}^^xsd:string ; schema:category :category/cost/{cost} , :category/availability/{availability} ; schema:areaServed {coverage}^^xsd:string ; schema:availableChannel :service/channel/AB-{service_id} , :service/channel/P-{service_id} ; schema:provider :service/provider/{service_id} ; schema:description :service/desc/{service_id} . 
+source		select
+			aid.service_id,
+			ab.service_name as service_name,
+			iriify(availability) as availability,
+			iriify("cost") as "cost",
+			coverage
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+
+mappingId	MAPID-Service-Category-Service-Main
+target		:service/{service_id} schema:category :category/service/main/{iripart} . 
+source		select service_id, iriify(service_name) as iripart from public.main_services
+
+mappingId	MAPID-Service-Category-Service-Other
+target		:service/{service_id} schema:category :category/service/other/{iripart} . 
+source		select service_id, iriify(service_name) as iripart from public.other_services
+
+mappingId	MAPID-Languages-Lexvo-Link
+target		:category/language/{iripart} skos:exactMatch <http://lexvo.org/id/iso639-3/{iso639_3}> .
+source		select distinct
+                "language",
+                iriify("language") as iripart,
+                iso639_3
+            from public.languages
+            where iso639_3 is not null
+
+mappingId	MAPID-Service-Category-Language
+target		:service/{service_id} schema:category :category/language/{iripart} . 
+source		select service_id, iriify("language") as iripart from public.languages
+
+mappingId	MAPID-Service-Category-Audience
+target		:service/{service_id} schema:category :category/audience/{iripart} . 
+source		select service_id, iriify(audience) as iripart from public.serving
+
+mappingId	MAPID-Service-Hours-Monday
+target		:service/{service_id} schema:openingHours :service/time/{service_id}/Monday .  :service/time/{service_id}/Monday xmlschema:time "Monday from {opens} to {closes}"^^xsd:string .
+source		select
+			aid.service_id,
+			hours_part(monday, 1) as opens,
+			hours_part(monday, 2) as closes
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where monday is not null;
+
+mappingId	MAPID-Service-Hours-Tuesday
+target		:service/{service_id} schema:openingHours :service/time/{service_id}/Tuesday . :service/time/{service_id}/Tuesday xmlschema:time "Tuesday from {opens} to {closes}"^^xsd:string .
+source		select
+			aid.service_id,
+			hours_part(Tuesday, 1) as opens,
+			hours_part(Tuesday, 2) as closes
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where Tuesday is not null;
+
+mappingId	MAPID-Service-Hours-Wednesday
+target		:service/{service_id} schema:openingHours :service/time/{service_id}/Wednesday . :service/time/{service_id}/Wednesday xmlschema:time "Wednesday from {opens} to {closes}"^^xsd:string .
+source		select
+			aid.service_id,
+			hours_part(Wednesday, 1) as opens,
+			hours_part(Wednesday, 2) as closes
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where Wednesday is not null;
+
+mappingId	MAPID-Service-Hours-Thursday
+target		:service/{service_id} schema:openingHours :service/time/{service_id}/Thursday . :service/time/{service_id}/Thursday xmlschema:time "Thursday from {opens} to {closes}"^^xsd:string .
+source		select
+			aid.service_id,
+			hours_part(Thursday, 1) as opens,
+			hours_part(Thursday, 2) as closes
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where Thursday is not null;
+
+mappingId	MAPID-Service-Hours-Friday
+target		:service/{service_id} schema:openingHours :service/time/{service_id}/Friday . :service/time/{service_id}/Friday xmlschema:time "Friday from {opens} to {closes}"^^xsd:string .
+source		select
+			aid.service_id,
+			hours_part(Friday, 1) as opens,
+			hours_part(Friday, 2) as closes
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where Friday is not null;
+
+mappingId	MAPID-Service-Hours-Saturday
+target		:service/{service_id} schema:openingHours :service/time/{service_id}/Saturday . :service/time/{service_id}/Saturday xmlschema:time "Saturday from {opens} to {closes}"^^xsd:string .
+source		select
+			aid.service_id,
+			hours_part(Saturday, 1) as opens,
+			hours_part(Saturday, 2) as closes
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where Saturday is not null;
+
+mappingId	MAPID-Service-Hours-Sunday
+target		:service/{service_id} schema:openingHours :service/time/{service_id}/Sunday . :service/time/{service_id}/Sunday xmlschema:time "Sunday from {opens} to {closes}"^^xsd:string .
+source		select
+			aid.service_id,
+			hours_part(Sunday, 1) as opens,
+			hours_part(Sunday, 2) as closes
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+			where Sunday is not null;
+
+mappingId	MAPID-Reviews
+target		:review/rating/{review_id} a schema:Rating . :review/{review_id} a schema:Review ; schema:itemReviewed :service/{service_id} ; schema:reviewRating :review/rating/{review_id} . :service/{service_id} schema:review :review/{review_id} . 
+source		select
+			   gr.review_stars,
+			   gr.review_id ,
+			   rsi.service_id 
+			from google_reviews gr 
+			left outer join review_service_ids rsi on gr.service_name = rsi.service_name
+
+mappingId	MAPID-Review-Text
+target		:review/{review_id} schema:reviewBody {review_text}^^xsd:string . 
+source		select
+			   gr.review_id ,
+			   gr.review_text 
+			from google_reviews gr 
+			where review_text is not null
+
+mappingId	MAPID-Service-Type
+target		:service/{service_id} schema:category :category/service_type/{service_type} . 
+source		select
+			aid.service_id,
+			ab.service_type
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url
+
+mappingId	MAPID-Google-Rating
+target		:service/{service_id} schema:ratingValue {google_rating}^^xsd:decimal .
+source		select
+			aid.service_id,
+			ab.google_rating
+			from public.aunt_bertha ab
+			join public.ab_ids aid on ab.service_url = aid.service_url 		
+
+mappingId   MAPID-Service-Geometry
+target      :service/geometry/{service_id} a geo:Geometry ; geo:asWKT "POINT({longitude} {latitude})"^^geo:wktLiteral .
+source      select
+                aid.service_id,
+                latitude,
+                longitude
+                from public.aunt_bertha ab
+                join public.ab_ids aid on ab.service_url = aid.service_url
+                where latitude is not null and longitude is not null
+
+mappingId   MAPID-Service-Location-Geometry
+target      :service/location/{service_id} geo:hasGeometry :service/geometry/{service_id} ; geo:defaultGeometry :service/geometry/{service_id} .
+source      select
+                aid.service_id
+                from public.aunt_bertha ab
+                join public.ab_ids aid on ab.service_url = aid.service_url
+                where latitude is not null and longitude is not null
+
+
+]]
+

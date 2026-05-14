@@ -1,0 +1,284 @@
+@prefix : <https://purl.org/okn/frink/kg/dreamkg/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obda: <https://w3id.org/obda/vocabulary#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@base <https://purl.org/okn/frink/kg/dreamkg/> .
+
+<https://purl.org/okn/frink/kg/dreamkg/> rdf:type owl:Ontology ;
+                                           rdfs:comment "Simple wrapping of the Schema ontology to allow mapping to triples. The only things in this ontology that are not from Schema are a handful of Individuals." .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://schema.org/about
+schema:about rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/audience
+schema:audience rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/availableChannel
+schema:availableChannel rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/category
+schema:category rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/containedInPlace
+schema:containedInPlace rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/description
+schema:description rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/hoursAvailable
+schema:hoursAvailable rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/inCodeSet
+schema:inCodeSet rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/itemReviewed
+schema:itemReviewed rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/provider
+schema:provider rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://schema.org/review
+schema:review rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/reviewRating
+schema:reviewRating rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/serviceChannel
+schema:serviceChannel rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/serviceLocation
+schema:serviceLocation rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/servicePhone
+schema:servicePhone rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/suggestedAnswer
+schema:suggestedAnswer rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://schema.org/abstract
+schema:abstract rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/address
+schema:address rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/areaServed
+schema:areaServed rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  http://schema.org/audienceType
+schema:audienceType rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/closes
+schema:closes rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/codeValue
+schema:codeValue rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/conditionsOfAccess
+schema:conditionsOfAccess rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/dayOfWeek
+schema:dayOfWeek rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/disambiguatingDescription
+schema:disambiguatingDescription rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/hasMap
+schema:hasMap rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/identifier
+schema:identifier rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/isAccessibleForFree
+schema:isAccessibleForFree rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/latitude
+schema:latitude rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/longitude
+schema:longitude rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/name
+schema:name rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/opens
+schema:opens rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/ratingValue
+schema:ratingValue rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/reviewBody
+schema:reviewBody rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/sameAs
+schema:sameAs rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/serviceUrl
+schema:serviceUrl rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/subjectOf
+schema:subjectOf rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/telephone
+schema:telephone rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/text
+schema:text rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/url
+schema:url rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://schema.org/AdministrativeArea
+schema:AdministrativeArea rdf:type owl:Class .
+
+
+###  http://schema.org/Answer
+schema:Answer rdf:type owl:Class .
+
+
+###  http://schema.org/Audience
+schema:Audience rdf:type owl:Class .
+
+
+###  http://schema.org/CategoryCode
+schema:CategoryCode rdf:type owl:Class .
+
+
+###  http://schema.org/ContactPoint
+schema:ContactPoint rdf:type owl:Class .
+
+
+###  http://schema.org/OpeningHoursSpecification
+schema:OpeningHoursSpecification rdf:type owl:Class .
+
+
+###  http://schema.org/Organization
+schema:Organization rdf:type owl:Class .
+
+
+###  http://schema.org/Place
+schema:Place rdf:type owl:Class .
+
+
+###  http://schema.org/Question
+schema:Question rdf:type owl:Class .
+
+
+###  http://schema.org/Rating
+schema:Rating rdf:type owl:Class .
+
+
+###  http://schema.org/Review
+schema:Review rdf:type owl:Class .
+
+
+###  http://schema.org/Service
+schema:Service rdf:type owl:Class .
+
+
+###  http://schema.org/ServiceChannel
+schema:ServiceChannel rdf:type owl:Class .
+
+
+###  http://schema.org/TextObject
+schema:TextObject rdf:type owl:Class .
+
+
+<https://purl.org/okn/frink/kg/dreamkg/> rdf:type owl:Ontology ;
+    rdfs:comment "..." .
+
+:ServiceGeometry rdf:type owl:Class ;
+    rdfs:subClassOf geo:Geometry .
+
+geo:hasGeometry rdf:type owl:ObjectProperty .
+geo:defaultGeometry rdf:type owl:ObjectProperty .
+
+geo:asWKT rdf:type owl:DatatypeProperty .
+geo:lat rdf:type owl:DatatypeProperty .
+geo:long rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://purl.org/okn/frink/kg/dreamkg/_CategoryCodeSet_Availability
+:_CategoryCodeSet_Availability rdf:type owl:NamedIndividual .
+
+
+###  https://purl.org/okn/frink/kg/dreamkg/_CategoryCodeSet_Cost
+:_CategoryCodeSet_Cost rdf:type owl:NamedIndividual .
+
+
+###  https://purl.org/okn/frink/kg/dreamkg/_CategoryCodeSet_Languages
+:_CategoryCodeSet_Languages rdf:type owl:NamedIndividual .
+
+
+###  https://purl.org/okn/frink/kg/dreamkg/_CategoryCodeSet_Services_Main
+:_CategoryCodeSet_Services_Main rdf:type owl:NamedIndividual .
+
+
+###  https://purl.org/okn/frink/kg/dreamkg/_CategoryCodeSet_Services_Other
+:_CategoryCodeSet_Services_Other rdf:type owl:NamedIndividual .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

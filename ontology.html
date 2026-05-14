@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="DREAM-KG ontology documentation" />
+  <meta name="author" content="DREAM-KG Team" />
+  <title>DREAM-KG Ontology</title>
+
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+  <link href="./css/styles.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --dream-primary: #1f4f82;
+      --dream-primary-dark: #0b1f38;
+      --dream-accent: #2f80ed;
+      --dream-soft: #f4f8fc;
+      --dream-text: #243447;
+      --dream-muted: #6f7f90;
+      --dream-card: #ffffff;
+      --dream-border: rgba(31, 79, 130, 0.14);
+      --dream-code: #eef5ff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      color: var(--dream-text);
+      background: #ffffff;
+      font-family: Lato, Arial, sans-serif;
+    }
+
+    .navbar-custom {
+      background: rgba(8, 25, 48, 0.94);
+      backdrop-filter: blur(8px);
+    }
+
+    .ontology-hero {
+      position: relative;
+      padding: 9.5rem 0 5.5rem;
+      color: #ffffff;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(47,128,237,0.48), transparent 34%),
+        radial-gradient(circle at 82% 16%, rgba(132,203,255,0.28), transparent 30%),
+        linear-gradient(135deg, #07172c 0%, #123b63 55%, #1f4f82 100%);
+    }
+
+    .ontology-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -25% -10%;
+      height: 230px;
+      background: rgba(255,255,255,0.08);
+      transform: rotate(-4deg);
+    }
+
+    .ontology-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      max-width: 980px;
+      margin: 0 auto 1.1rem;
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      font-weight: 900;
+      line-height: 1.02;
+      text-align: center;
+    }
+
+    .hero-lead {
+      max-width: 880px;
+      margin: 0 auto;
+      color: rgba(255,255,255,0.86);
+      font-size: 1.15rem;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+      margin-top: 2rem;
+    }
+
+    .hero-actions a {
+      display: inline-block;
+      padding: 0.8rem 1.2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .btn-lightish {
+      color: var(--dream-primary-dark);
+      background: #ffffff;
+    }
+
+    .btn-ghost {
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .page-layout {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 2rem;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .toc {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+      padding: 1.25rem;
+      border: 1px solid var(--dream-border);
+      border-radius: 24px;
+      background: #ffffff;
+      box-shadow: 0 14px 34px rgba(31, 79, 130, 0.08);
+    }
+
+    .toc-title {
+      margin-bottom: 0.8rem;
+      color: var(--dream-primary);
+      font-weight: 900;
+      font-size: 1.05rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 0.48rem 0;
+      color: var(--dream-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(31,79,130,0.07);
+    }
+
+    .toc a:hover { color: var(--dream-accent); }
+
+    section.doc-section {
+      margin-bottom: 2rem;
+      padding: clamp(1.35rem, 3vw, 2.4rem);
+      border: 1px solid var(--dream-border);
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: 0 16px 40px rgba(31, 79, 130, 0.07);
+    }
+
+    section.doc-section:nth-child(even) { background: var(--dream-soft); }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 0.65rem;
+      color: var(--dream-accent);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+    }
+
+    h2 {
+      color: var(--dream-primary);
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      color: #1d2f43;
+      font-weight: 850;
+      margin-top: 1.4rem;
+    }
+
+    p, li {
+      font-size: 1.02rem;
+      line-height: 1.75;
+    }
+
+    .meta-grid,
+    .summary-grid,
+    .card-grid,
+    .xrefs-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .meta-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .summary-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .card-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .xrefs-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+    .info-card {
+      padding: 1.15rem;
+      border: 1px solid var(--dream-border);
+      border-radius: 22px;
+      background: #ffffff;
+    }
+
+    .soft-card {
+      background: rgba(255,255,255,0.76);
+    }
+
+    .metric {
+      display: block;
+      color: var(--dream-primary);
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .metric-label {
+      display: block;
+      margin-top: 0.45rem;
+      color: var(--dream-muted);
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      list-style: none;
+    }
+
+    .tag-list li {
+      padding: 0.42rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(47, 128, 237, 0.1);
+      color: var(--dream-primary);
+      font-size: 0.9rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .namespace-table,
+    .mapping-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #ffffff;
+    }
+
+    .namespace-table th,
+    .namespace-table td,
+    .mapping-table th,
+    .mapping-table td {
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--dream-border);
+      vertical-align: top;
+      font-size: 0.95rem;
+    }
+
+    .namespace-table th,
+    .mapping-table th {
+      color: var(--dream-primary);
+      background: #eef5ff;
+      font-weight: 900;
+      text-align: left;
+    }
+
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    :not(pre) > code {
+        padding: 0.15rem 0.35rem;
+        border-radius: 7px;
+        background: var(--dream-code);
+        color: #163b63;
+    }
+
+    pre {
+        overflow-x: auto;
+        padding: 1.15rem 1.25rem;
+        border-radius: 18px;
+        background: #102845;
+        color: #f4f8ff;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        border: 1px solid rgba(47,128,237,0.18);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    pre code {
+        display: block;
+        margin: 0;
+        padding: 0;
+        background: transparent;   /* 关键修复 */
+        color: inherit;
+        border-radius: 0;
+        white-space: pre-wrap;
+    }
+
+    .diagram {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .node {
+        min-height: 96px;
+        display: flex;
+        flex-direction: column;   /* 关键修复 */
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        padding: 0.9rem 1rem;
+        border-radius: 20px;
+        text-align: center;
+        font-weight: 900;
+        color: #14365c;
+        background: #ffffff;
+        border: 1px solid var(--dream-border);
+        box-shadow: 0 10px 25px rgba(31,79,130,0.07);
+        line-height: 1.25;
+    }
+
+    .node small {
+        display: block;
+        margin: 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.35;
+        color: var(--dream-primary);
+    }
+
+    .node.main { background: #e8f2ff; color: var(--dream-primary); }
+    .arrow { text-align: center; color: var(--dream-accent); font-weight: 900; }
+
+    .download-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .download-row a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 999px;
+      color: var(--dream-primary);
+      text-decoration: none;
+      font-weight: 900;
+      background: rgba(47,128,237,0.1);
+      border: 1px solid rgba(47,128,237,0.16);
+    }
+
+    .footer-note {
+      padding: 2rem 1rem;
+      color: rgba(255,255,255,0.76);
+      text-align: center;
+      background: var(--dream-primary-dark);
+    }
+
+    @media (max-width: 900px) {
+      .page-layout { grid-template-columns: 1fr; }
+      .toc { position: relative; top: auto; }
+      .diagram { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container px-5">
+      <a class="navbar-brand" href="./index.html">DREAM-KG</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="./index.html#overview">Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="./index.html#graph">Graph</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./ontology.html">Ontology</a></li>
+          <li class="nav-item"><a class="nav-link" href="./image.html">Data</a></li>
+          <li class="nav-item"><a class="nav-link" href="./index.html#team">Team</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="ontology-hero text-center">
+    <div class="container px-5">
+      <div class="hero-kicker"><i class="fa-solid fa-diagram-project"></i> Ontology Documentation</div>
+      <h1 class="hero-title">DREAM-KG Ontology</h1>
+      <p class="hero-lead">
+        A lightweight documentation page for the DREAM-KG semantic model, describing how homeless-service data,
+        service locations, languages, costs, availability, reviews, and geospatial information are represented as RDF triples.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-lightish" href="#overview">Explore ontology</a>
+        <a class="btn-ghost" href="./graph/index.html">Open graph explorer</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-layout">
+    <aside class="toc" aria-label="Ontology table of contents">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#metadata">Metadata</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#introduction">Introduction</a>
+      <a href="#namespaces">Namespaces</a>
+      <a href="#overview">Ontology Overview</a>
+      <a href="#model">Conceptual Model</a>
+      <a href="#cross-reference">Cross-reference</a>
+      <a href="#mappings">OBDA Mappings</a>
+      <a href="#data-sources">Data Sources</a>
+      <a href="#examples">Example Triples</a>
+    </aside>
+
+    <div class="doc-content">
+      <section id="metadata" class="doc-section">
+        <span class="section-kicker">Metadata</span>
+        <h2>Ontology Specification Draft</h2>
+        <div class="meta-grid">
+          <div class="info-card">
+            <strong>Ontology URI</strong>
+            <p><code>https://purl.org/okn/frink/kg/dreamkg/</code></p>
+          </div>
+          <div class="info-card">
+            <strong>Primary vocabulary</strong>
+            <p>Schema.org, GeoSPARQL, SKOS, OWL, RDF, RDFS, XSD</p>
+          </div>
+          <div class="info-card">
+            <strong>Knowledge graph focus</strong>
+            <p>Homeless services, service categories, access conditions, location, reviews, and community context.</p>
+          </div>
+        </div>
+
+        <div class="download-row">
+          <a href="./ontology.ttl"><i class="fa-solid fa-file-code"></i> TTL</a>
+          <!-- <a href="./ontology.owl"><i class="fa-solid fa-code"></i> OWL</a> -->
+          <a href="./mappings/ontology.obda"><i class="fa-solid fa-database"></i> OBDA Mapping</a>
+          <a href="./graph/index.html"><i class="fa-solid fa-network-wired"></i> Visualize Graph</a>
+        </div>
+      </section>
+
+      <section id="abstract" class="doc-section">
+        <span class="section-kicker">Abstract</span>
+        <h2>Abstract</h2>
+        <p>
+          The DREAM-KG ontology provides a semantic layer for integrating public and provider-facing information about
+          services for people experiencing homelessness. It models each service as a <code>schema:Service</code> and links it to
+          categories, audiences, languages, costs, availability, contact channels, textual descriptions, locations, reviews,
+          ratings, and geospatial geometries.
+        </p>
+        <p>
+          The ontology is intentionally lightweight: rather than creating a large custom vocabulary, DREAM-KG wraps and reuses
+          widely adopted terms from Schema.org and GeoSPARQL. This makes the graph easier to publish, query, extend, and connect
+          with external resources such as ZIP-code areas, language identifiers, and civic datasets.
+        </p>
+      </section>
+
+      <section id="introduction" class="doc-section">
+        <span class="section-kicker">Introduction</span>
+        <h2>Motivation and Goals</h2>
+        <p>
+          Homeless-service information is scattered across provider websites, service directories, map records, reviews,
+          eligibility descriptions, and local civic datasets. DREAM-KG organizes these heterogeneous records into a connected
+          knowledge graph so that users and downstream AI systems can reason over service type, access constraints, location,
+          language support, operating hours, and surrounding community context.
+        </p>
+        <p>The ontology is designed around four goals:</p>
+        <ul>
+          <li><strong>Service discovery:</strong> represent services, names, categories, contact methods, and websites.</li>
+          <li><strong>Accessibility reasoning:</strong> encode eligibility, cost, availability, language support, and operating hours.</li>
+          <li><strong>Spatial grounding:</strong> connect services to places, coordinates, ZIP-code areas, and GeoSPARQL geometries.</li>
+          <li><strong>Trust and context:</strong> attach reviews, rating values, social links, and local civic context such as crime data.</li>
+        </ul>
+      </section>
+
+      <section id="namespaces" class="doc-section">
+        <span class="section-kicker">Namespace declarations</span>
+        <h2>Namespaces Used in DREAM-KG</h2>
+        <table class="namespace-table">
+          <thead>
+            <tr><th>Prefix</th><th>Namespace URI</th><th>Use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>:</code></td><td><code>https://purl.org/okn/frink/kg/dreamkg/</code></td><td>DREAM-KG resources</td></tr>
+            <tr><td><code>schema</code></td><td><code>http://schema.org/</code></td><td>Service, Place, ContactPoint, Review, Rating, category, name, telephone, etc.</td></tr>
+            <tr><td><code>geo</code></td><td><code>http://www.opengis.net/ont/geosparql#</code></td><td>Geometry and WKT literals</td></tr>
+            <tr><td><code>kwgo</code></td><td><code>http://stko-kwg.geog.ucsb.edu/lod/ontology/</code></td><td>Spatial relation vocabulary</td></tr>
+            <tr><td><code>kwgr</code></td><td><code>http://stko-kwg.geog.ucsb.edu/lod/resource/</code></td><td>External ZIP-code area resources</td></tr>
+            <tr><td><code>skos</code></td><td><code>http://www.w3.org/2004/02/skos/core#</code></td><td>External links such as exact language matches</td></tr>
+            <tr><td><code>owl</code></td><td><code>http://www.w3.org/2002/07/owl#</code></td><td>Ontology and class/property declarations</td></tr>
+            <tr><td><code>rdf</code></td><td><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></td><td>RDF typing</td></tr>
+            <tr><td><code>rdfs</code></td><td><code>http://www.w3.org/2000/01/rdf-schema#</code></td><td>Labels, comments, subclass relationships</td></tr>
+            <tr><td><code>xsd</code></td><td><code>http://www.w3.org/2001/XMLSchema#</code></td><td>String, decimal, URI, and typed literals</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="overview" class="doc-section">
+        <span class="section-kicker">Overview</span>
+        <h2>DREAM-KG Ontology Overview</h2>
+        <div class="summary-grid">
+          <div class="info-card soft-card"><span class="metric">11</span><span class="metric-label">Main reused or local classes</span></div>
+          <div class="info-card soft-card"><span class="metric">18+</span><span class="metric-label">Object properties used in mappings</span></div>
+          <div class="info-card soft-card"><span class="metric">24+</span><span class="metric-label">Data properties used for service attributes</span></div>
+          <div class="info-card soft-card"><span class="metric">30+</span><span class="metric-label">OBDA mappings from relational tables/views</span></div>
+        </div>
+
+        <h3>Core Classes</h3>
+        <ul class="tag-list">
+          <li>schema:Service</li>
+          <li>schema:CategoryCode</li>
+          <li>schema:ServiceChannel</li>
+          <li>schema:ContactPoint</li>
+          <li>schema:Place</li>
+          <li>schema:TextObject</li>
+          <li>schema:Review</li>
+          <li>schema:Rating</li>
+          <li>schema:Audience</li>
+          <li>schema:Organization</li>
+          <li>geo:Geometry</li>
+        </ul>
+
+        <h3>Major Property Groups</h3>
+        <div class="card-grid">
+          <div class="info-card">
+            <strong>Identity</strong>
+            <p><code>schema:identifier</code>, <code>schema:name</code>, <code>schema:sameAs</code>, <code>schema:url</code></p>
+          </div>
+          <div class="info-card">
+            <strong>Classification</strong>
+            <p><code>schema:category</code>, <code>schema:codeValue</code>, <code>schema:inCodeSet</code>, <code>skos:exactMatch</code></p>
+          </div>
+          <div class="info-card">
+            <strong>Access</strong>
+            <p><code>schema:conditionsOfAccess</code>, <code>schema:areaServed</code>, <code>schema:openingHours</code></p>
+          </div>
+          <div class="info-card">
+            <strong>Contact and channel</strong>
+            <p><code>schema:availableChannel</code>, <code>schema:serviceUrl</code>, <code>schema:servicePhone</code>, <code>schema:telephone</code></p>
+          </div>
+          <div class="info-card">
+            <strong>Spatial</strong>
+            <p><code>schema:serviceLocation</code>, <code>schema:containedInPlace</code>, <code>kwgo:sfWithin</code>, <code>geo:asWKT</code></p>
+          </div>
+          <div class="info-card">
+            <strong>Reputation</strong>
+            <p><code>schema:review</code>, <code>schema:reviewBody</code>, <code>schema:reviewRating</code>, <code>schema:ratingValue</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="model" class="doc-section">
+        <span class="section-kicker">Description</span>
+        <h2>Conceptual Model</h2>
+        <p>
+          The central node is <code>schema:Service</code>. Each service is connected to structured category nodes,
+          description nodes, service channels, contact points, location nodes, review nodes, and geometry nodes.
+        </p>
+
+        <div class="diagram" aria-label="DREAM-KG ontology conceptual diagram">
+          <div class="node">
+            <div>CategoryCode</div>
+            <small>service, cost, availability, language</small>
+         </div>
+          <div class="arrow">→</div>
+          <div class="node main">schema:Service</div>
+          <div class="arrow">→</div>
+          <div class="node">ServiceChannel<br><small>Aunt Bertha / Provider</small></div>
+          <div class="node">
+            <div>TextObject</div>
+            <small>description + eligibility</small>
+          </div>
+
+            <div class="node">
+            <div>Review + Rating</div>
+            </div>
+
+            <div class="node">
+            <div>ServiceChannel</div>
+            <small>Aunt Bertha / Provider</small>
+            </div>
+
+            <div class="node">
+            <div>Place + Geometry</div>
+            <small>address, ZIP, WKT</small>
+            </div>
+
+            <div class="node">
+            <div>Language / Audience</div>
+            <small>accessibility categories</small>
+            </div>
+        </div>
+      </section>
+
+      <section id="cross-reference" class="doc-section">
+        <span class="section-kicker">Cross-reference</span>
+        <h2>Classes, Object Properties, and Data Properties</h2>
+
+        <div class="xrefs-grid">
+          <div class="info-card">
+            <h3>Classes</h3>
+            <ul>
+              <li><code>schema:Service</code> — a social or community service.</li>
+              <li><code>schema:CategoryCode</code> — controlled category values such as language, cost, service type, and availability.</li>
+              <li><code>schema:ServiceChannel</code> — provider or Aunt Bertha access channel.</li>
+              <li><code>schema:ContactPoint</code> — phone contact for a service.</li>
+              <li><code>schema:Place</code> — physical service location.</li>
+              <li><code>schema:TextObject</code> — service description and eligibility text.</li>
+              <li><code>schema:Review</code> and <code>schema:Rating</code> — review entities and ratings.</li>
+              <li><code>geo:Geometry</code> — WKT representation of service coordinates.</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3>Object Properties</h3>
+            <ul>
+              <li><code>schema:category</code> — links services to category codes.</li>
+              <li><code>schema:availableChannel</code> — links services to access channels.</li>
+              <li><code>schema:serviceLocation</code> — links provider channel to location.</li>
+              <li><code>schema:servicePhone</code> — links provider channel to phone contact.</li>
+              <li><code>schema:description</code> — links a service to a text object.</li>
+              <li><code>schema:review</code> — links a service to reviews.</li>
+              <li><code>geo:hasGeometry</code> and <code>geo:defaultGeometry</code> — attach geometry to a place.</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3>Data Properties</h3>
+            <ul>
+              <li><code>schema:identifier</code>, <code>schema:name</code>, <code>schema:text</code></li>
+              <li><code>schema:conditionsOfAccess</code>, <code>schema:areaServed</code></li>
+              <li><code>schema:telephone</code>, <code>schema:serviceUrl</code></li>
+              <li><code>schema:address</code>, <code>schema:latitude</code>, <code>schema:longitude</code></li>
+              <li><code>schema:postalCode</code>, <code>schema:hasMap</code></li>
+              <li><code>schema:reviewBody</code>, <code>schema:ratingValue</code></li>
+              <li><code>geo:asWKT</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="mappings" class="doc-section">
+        <span class="section-kicker">OBDA Mappings</span>
+        <h2>Relational-to-RDF Mapping Summary</h2>
+        <p>
+          DREAM-KG uses Ontop-style OBDA mappings to transform relational tables and SQL views into RDF triples.
+          The most important mappings are summarized below.
+        </p>
+
+        <table class="mapping-table">
+          <thead>
+            <tr><th>Mapping group</th><th>Source table/view</th><th>Generated RDF pattern</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Services</td><td><code>aunt_bertha</code>, <code>ab_ids</code></td><td><code>:service/{service_id} a schema:Service</code></td></tr>
+            <tr><td>Main / other service categories</td><td><code>main_services</code>, <code>other_services</code></td><td><code>schema:category :category/service/main/{name}</code></td></tr>
+            <tr><td>Language categories</td><td><code>languages</code>, <code>language_codes</code></td><td><code>schema:category :category/language/{language}</code>, plus Lexvo links</td></tr>
+            <tr><td>Audience categories</td><td><code>serving</code></td><td><code>schema:category :category/audience/{audience}</code></td></tr>
+            <tr><td>Cost and availability</td><td><code>aunt_bertha</code></td><td><code>schema:category :category/cost/{cost}</code>, <code>:category/availability/{availability}</code></td></tr>
+            <tr><td>Description and eligibility</td><td><code>eligibility</code>, <code>aunt_bertha</code></td><td><code>schema:TextObject</code> with <code>schema:text</code> and <code>schema:conditionsOfAccess</code></td></tr>
+            <tr><td>Channels and phone</td><td><code>ab_ids</code>, <code>aunt_bertha</code></td><td><code>schema:ServiceChannel</code> and <code>schema:ContactPoint</code></td></tr>
+            <tr><td>Location and geometry</td><td><code>aunt_bertha</code>, <code>ab_ids</code></td><td><code>schema:Place</code>, ZIP-code links, and <code>geo:Geometry</code></td></tr>
+            <tr><td>Reviews and ratings</td><td><code>google_reviews</code>, <code>review_service_ids</code></td><td><code>schema:Review</code>, <code>schema:Rating</code>, <code>schema:reviewBody</code></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="data-sources" class="doc-section">
+        <span class="section-kicker">Data Sources</span>
+        <h2>Source Tables and SQL Views</h2>
+        <div class="card-grid">
+          <div class="info-card">
+            <h3><code>aunt_bertha</code></h3>
+            <p>Main service directory table containing service names, URLs, descriptions, contact information, location fields, languages, cost, availability, hours, ratings, and service type.</p>
+          </div>
+          <div class="info-card">
+            <h3><code>ab_ids</code></h3>
+            <p>Extracts Aunt Bertha service IDs from service URLs and serves as the central join key for RDF resource IRIs.</p>
+          </div>
+          <div class="info-card">
+            <h3><code>main_services</code> and <code>other_services</code></h3>
+            <p>Normalize list-like service category fields into one row per service-category pair.</p>
+          </div>
+          <div class="info-card">
+            <h3><code>languages</code></h3>
+            <p>Normalizes language values and connects them to ISO-639 identifiers and optional NCIT codes.</p>
+          </div>
+          <div class="info-card">
+            <h3><code>google_reviews</code></h3>
+            <p>Stores review IDs, stars, review text, author IDs, and service names for reputation-related triples.</p>
+          </div>
+          <div class="info-card">
+            <h3><code>phila_crime</code></h3>
+            <p>Stores Philadelphia crime incidents with time, category, coordinate, and ZIP-code attributes for future neighborhood-safety integration.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="examples" class="doc-section">
+        <span class="section-kicker">Examples</span>
+        <h2>Example RDF Patterns</h2>
+        <p>The following Turtle-style examples show the intended shape of DREAM-KG triples.</p>
+
+<pre><code>:service/12345 a schema:Service ;
+    schema:identifier "12345"^^xsd:string ;
+    schema:name "Example Shelter Service"^^xsd:string ;
+    schema:category :category/service/main/Shelter,
+                    :category/language/English,
+                    :category/cost/Free ;
+    schema:availableChannel :service/channel/AB-12345,
+                            :service/channel/P-12345 ;
+    schema:description :service/description/12345 ;
+    schema:ratingValue "4.5"^^xsd:decimal .</code></pre>
+
+<pre><code>:service/location/12345 a schema:Place ;
+    schema:address "123 Main St, Philadelphia, PA"^^xsd:string ;
+    schema:latitude "39.9526"^^xsd:decimal ;
+    schema:longitude "-75.1652"^^xsd:decimal ;
+    schema:containedInPlace kwgr:zipCodeArea.19104 ;
+    geo:hasGeometry :service/geometry/12345 .
+
+:service/geometry/12345 a geo:Geometry ;
+    geo:asWKT "POINT(-75.1652 39.9526)"^^geo:wktLiteral .</code></pre>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer-note">
+    <p class="mb-0">DREAM-KG Ontology Documentation · Built for service discovery, semantic integration, and graph-based AI reasoning.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+</html>
