@@ -118,7 +118,7 @@ def query_service_type_subgraph(service_type_name: str):
     RETURN t, r, s
     """
 
-    with driver.session() as session:
+    with driver.session(database="interface") as session:
         records = list(session.run(cypher, type_name=service_type_name))
 
         if not records:
@@ -165,7 +165,7 @@ def query_node_detail(node_id: str):
     LIMIT 1
     """
 
-    with driver.session() as session:
+    with driver.session(database="interface") as session:
         record = session.run(cypher, name=name).single()
         if record is None:
             return None
@@ -192,7 +192,7 @@ def query_neighbors(node_id: str):
     else:
         return {"nodes": [], "edges": []}
 
-    with driver.session() as session:
+    with driver.session(database="interface") as session:
         records = list(session.run(cypher, name=name))
 
         if not records:
@@ -238,7 +238,7 @@ def query_graph(limit_nodes=80):
     LIMIT $limit
     """
 
-    with driver.session() as session:
+    with driver.session(database="interface") as session:
         records = list(session.run(cypher, limit=limit_nodes))
 
         node_map = {}
@@ -309,7 +309,7 @@ def query_service_detail_for_ai(service_name: str):
     LIMIT 1
     """
 
-    with driver.session() as session:
+    with driver.session(database="interface") as session:
         record = session.run(cypher, name=service_name).single()
         if record is None:
             return None

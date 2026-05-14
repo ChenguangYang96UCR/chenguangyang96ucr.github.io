@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CytoscapeComponent from "react-cytoscapejs";
-const API_BASE = "http://127.0.0.1:5000";
+const API_BASE = "http://40.125.43.67:5000";
 
 function Section({ title, children }) {
   return (

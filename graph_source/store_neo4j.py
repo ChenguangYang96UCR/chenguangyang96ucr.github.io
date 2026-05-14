@@ -3,9 +3,20 @@ import re
 from collections import defaultdict
 from py2neo import Graph, Node, NodeMatcher
 
-GRAPH_URI = "bolt://localhost:7687"
-GRAPH_AUTH = ("neo4j", "123456789")
+GRAPH_URI = os.getenv("NEO4J_URI", "http://40.125.43.67:7687")
+GRAPH_AUTH = (
+    os.getenv("NEO4J_USER", "neo4j"),
+    os.getenv("NEO4J_PASSWORD", "123456789")
+)
 
+GRAPH_DATABASE = os.getenv("NEO4J_DATABASE", "interface")
+
+def get_graph():
+    return Graph(
+        GRAPH_URI,
+        auth=GRAPH_AUTH,
+        name=GRAPH_DATABASE
+    )
 
 def find_files(directory, filetype="txt"):
     files = []
@@ -139,7 +150,7 @@ def store_triples_into_neo4j(text_file, first_flag=False):
     if not os.path.exists(file_path):
         raise ValueError(f"Triples file {file_path} does not exist")
 
-    graph = Graph(GRAPH_URI, auth=GRAPH_AUTH)
+    graph = get_graph()
 
     if first_flag:
         print("Deleting all existing nodes and relationships...")
@@ -305,7 +316,7 @@ def store_triples_into_neo4j(text_file, first_flag=False):
 
 
 def print_graph_summary():
-    graph = Graph(GRAPH_URI, auth=GRAPH_AUTH)
+    graph = get_graph()
 
     print("\n===== Graph Summary =====")
 
